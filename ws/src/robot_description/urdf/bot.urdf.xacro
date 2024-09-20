@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot name="bot_example" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:include filename="$(find robot_description)/urdf/bot_gazebo.xacro"/>
+	<xacro:include filename="$(find robot_description)/urdf/bot_ros2_control.xacro"/>
 
 	<xacro:property name="PI" value="3.1415926535897932384626433832795" />
 	<xacro:property name="effort" value="30.0" />
@@ -11,6 +14,17 @@
 		</inertial>
 	</xacro:macro>
 
+
+	<xacro:macro name="default_transmision" params="number">
+		<transmission name="transmission_${number}">
+			<plugin>transmission_interface/simpleTransmission</plugin>
+			<joint name="joint_${number}" role="joint1">
+				<mechanicalReduction>1.0</mechanicalReduction>
+			</joint>
+			<actuator name="motor_${number}" role="actuator1"/>
+		</transmission>
+
+	</xacro:macro>
 
 	<link name="world" />
 	<link name="base_link">
@@ -48,7 +62,7 @@
 		</visual>
 	</link>
 
-	<joint name="base_plate_joint" type="revolute">
+	<joint name="joint_1" type="revolute">
 		<parent link="base_link" />
 		<child link="base_plate" />
 		<axis xyz="0.0 0.0 1" />
@@ -230,6 +244,10 @@
 			</plugin>
 	</sensor>
 </gazebo>
+	<xacro:default_transmision number="1"/>
+	<xacro:default_transmision number="2"/>
+	<xacro:default_transmision number="3"/>
+	<xacro:default_transmision number="4"/>
 
 
 </robot>			
