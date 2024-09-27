@@ -20,6 +20,10 @@ setup(
     entry_points={
         "console_scripts": [
             f"simple_parameter={package_name}.single_parameter:main",
+            f"simple_services_server={package_name}.simple_services_server:main",
+            f"simple_services_client={package_name}.simple_services_client:main",
+
+
         ],
     },
 )
