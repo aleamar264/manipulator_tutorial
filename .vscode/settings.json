@@ -1,5 +1,10 @@
 {
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.autoImportCompletions": true,
-    "ros.distro": "humble"
+    "ros.distro": "iron",
+    "terminal.integrated.env.linux": {
+        "PYTHONPATH": "/root/Documents/manipulator_tutorial/ws/install/robot_msgs/lib/python3.10/site-packages:${PYTHONPATH}"
+      },
+      "python.envFile": "${workspaceFolder}/.env"
 }
+

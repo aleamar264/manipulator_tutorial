@@ -2,7 +2,7 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, TimerAction
 from launch.substitutions import Command, LaunchConfiguration
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
@@ -44,12 +44,12 @@ def generate_launch_description():
         executable="spawner",
         arguments=["arm_controller", "--controller-manager", "/controller_manager"],
     )
-
-    gripper_controller_spawner: Node = Node(
+    
+    gripper_controller_spawner = TimerAction(period=5.0, actions=[Node(
         package="controller_manager",
         executable="spawner",
         arguments=["gripper_controller", "--controller-manager", "/controller_manager"],
-    )
+    )])
 
     return LaunchDescription(
         [

@@ -54,12 +54,12 @@
 			<geometry>
 				<mesh filename="package://robot_description/meshes/base_plate.STL" scale="0.01 0.01 0.01" />
 			</geometry>
-			<collision>
-				<geometry>
-					<mesh filename="package://robot_description/meshes/base_plate.STL" scale="0.01 0.01 0.01" />
-				</geometry>
-			</collision>
 		</visual>
+		<collision>
+			<geometry>
+				<mesh filename="package://robot_description/meshes/base_plate.STL" scale="0.01 0.01 0.01" />
+			</geometry>
+		</collision>
 	</link>
 
 	<joint name="joint_1" type="revolute">

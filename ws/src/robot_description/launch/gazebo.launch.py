@@ -10,9 +10,8 @@ from launch.actions import (
 )
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, LaunchConfiguration
-from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
-
+from launch_ros.actions import Node
 
 def generate_launch_description():
     bot_description = get_package_share_directory("robot_description")
@@ -22,6 +21,13 @@ def generate_launch_description():
     model_path += pathsep + os.path.join(description_prefix, "share")
 
     env_variable = SetEnvironmentVariable("GAZEBO_MODEL_PATH", model_path)
+
+
+    declare_use_sim_time = DeclareLaunchArgument(
+        'use_sim_time',
+        default_value='true',  # Enable simulation time by default
+        description='Use simulation (Gazebo) clock if true'
+    )
 
     model_arg = DeclareLaunchArgument(
         name="model",
@@ -50,7 +56,8 @@ def generate_launch_description():
                 "launch",
                 "gzserver.launch.py",
             )
-        )
+        ),
+        launch_arguments={'use_sim_time': LaunchConfiguration('use_sim_time')}.items()
     )
     start_gazebo_client = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -59,7 +66,9 @@ def generate_launch_description():
                 "launch",
                 "gzclient.launch.py",
             )
-        )
+        ),
+        launch_arguments={'use_sim_time': LaunchConfiguration('use_sim_time')}.items()
+
     )
 
     spwan_robot: Node = Node(
@@ -71,6 +80,7 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            declare_use_sim_time,
             env_variable,
             model_arg,
             robot_state_publisher_node,
