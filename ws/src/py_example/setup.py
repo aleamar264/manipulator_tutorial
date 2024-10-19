@@ -23,7 +23,12 @@ setup(
             f"simple_services_server={package_name}.simple_services_server:main",
             f"simple_services_client={package_name}.simple_services_client:main",
             f"simple_action_server={package_name}.simple_action_server:main",
-            f"simple_action_client={package_name}.simple_action_client:main"
+            f"simple_action_client={package_name}.simple_action_client:main",
+            f"simple_lifecycle_node={package_name}.simple_lifecycle_node:main",
+
+
+
+            
 
 
         ],

@@ -17,6 +17,7 @@ find_package(robot_msgs REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
 
 
 
@@ -33,10 +34,15 @@ ament_target_dependencies(simple_services_client rclcpp rcl_interfaces robot_msg
 add_executable(simple_moveit_Interface src/simple_moveit_Interface.cpp)
 ament_target_dependencies(simple_moveit_Interface rclcpp rcl_interfaces moveit_ros_planning_interface)
 
+add_executable(simple_lifecycle_node src/simple_lifecycle_node.cpp)
+ament_target_dependencies(simple_lifecycle_node rclcpp rcl_interfaces rclcpp_lifecycle std_msgs)
+
 add_library(simple_action_server SHARED src/simple_server_action.cpp)
+
 target_include_directories(simple_action_server PRIVATE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
+
 target_compile_definitions(simple_action_server
 PRIVATE "SIMPLE_ACTION_SERVER_CPP_BUILDING_DLL")
 ament_target_dependencies(simple_action_server
@@ -73,6 +79,7 @@ simple_services_client
 simple_action_server
 simple_action_client
 simple_moveit_Interface
+simple_lifecycle_node
 DESTINATION lib/${PROJECT_NAME})
 
 install(TARGETS
