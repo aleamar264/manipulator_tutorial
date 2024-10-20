@@ -1,0 +1,11 @@
+<library path="bot_controller">
+    <class name = "bot_controller/BotInterface"
+    type="bot_controller::BotInterface"
+    base_class_type="hardware_interface::SystemInterface">
+    <description>
+        Bot hardware Interface (arduino interface)
+    </description>
+
+    </class>
+
+</library>

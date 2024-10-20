@@ -1,5 +1,6 @@
 from setuptools import find_packages, setup
-
+import os
+from glob import glob
 package_name = "py_example"
 
 setup(
@@ -9,6 +10,7 @@ setup(
     data_files=[
         ("share/ament_index/resource_index/packages", ["resource/" + package_name]),
         ("share/" + package_name, ["package.xml"]),
+        (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', "*.launch.[pxy][yma]*")))
     ],
     install_requires=["setuptools"],
     zip_safe=True,
@@ -25,6 +27,7 @@ setup(
             f"simple_action_server={package_name}.simple_action_server:main",
             f"simple_action_client={package_name}.simple_action_client:main",
             f"simple_lifecycle_node={package_name}.simple_lifecycle_node:main",
+            f"simple_moveit_interface={package_name}.simple_moveit_interface:main",
 
 
 

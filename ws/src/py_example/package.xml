@@ -16,7 +16,8 @@
   <depend>std_msgs</depend>
   <depend>rclpy_interface</depend>
   <exec_depend>robot_msgs</exec_depend>
-
+  <exec_depend>ros2launch</exec_depend>
+  <exec_depend condition="$ROS_DISTRO >= iron">moveit_py</exec_depend>
 
   
   <export>

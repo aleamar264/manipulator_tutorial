@@ -12,6 +12,13 @@ find_package(rclcpp_action REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(robot_msgs REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
+find_package(ament_cmake_python REQUIRED)
+
+ament_python_install_package(${PROJECT_NAME})
+install(PROGRAMS
+  ${PROJECT_NAME}/task_server.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 add_library(task_server SHARED src/task_server.cpp)
 target_include_directories(task_server PRIVATE

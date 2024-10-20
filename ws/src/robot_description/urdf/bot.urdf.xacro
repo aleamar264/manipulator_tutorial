@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <robot name="bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+	<xacro:arg name="is_sim" default="true"/>
+
 	<xacro:include filename="$(find robot_description)/urdf/bot_gazebo.xacro"/>
 	<xacro:include filename="$(find robot_description)/urdf/bot_ros2_control.xacro"/>
 
